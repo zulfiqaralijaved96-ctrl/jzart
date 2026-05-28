@@ -54,9 +54,6 @@ export function ProcessIllustrationRenderer({
   return (
     <div className="absolute inset-0 w-full h-full flex items-center justify-center overflow-hidden">
       
-      {/* Dynamic Background */}
-      <motion.div className="absolute inset-0 transition-colors duration-200" style={{ backgroundColor: bg }} />
-      
       {/* Universal Grid (Fades out after Step 1 is done) */}
       <motion.div 
         style={{ opacity: useTransform(progress, [0, step * 2 - fade, step * 2], [0.3, 0.3, 0]) }} 
