@@ -3,6 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import { BrandedImagePlaceholder } from "@/components/ui/BrandedImagePlaceholder";
 import Image from "next/image";
+import BrandLogo from "./BrandLogo";
 
 interface CarouselItem {
   id: string;
@@ -57,7 +58,11 @@ export default function TrustedByCarousel({ items }: { items: CarouselItem[] }) 
               border: "1px solid var(--site-border)",
             }}
           >
-            {(item.imageUrl || item.logoUrl) ? (
+            {item.logoUrl === "placeholder" ? (
+              <div className="absolute inset-0 flex items-center justify-center p-6 pb-12 transition-transform duration-700 group-hover:scale-105">
+                <BrandLogo name={item.name || "LU"} className="max-w-[85%] max-h-[85%]" />
+              </div>
+            ) : (item.imageUrl || item.logoUrl) ? (
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none pb-[20%]">
                 <div className="relative flex justify-center w-full" style={{ height: `${item.height || 48}px` }}>
                   <Image

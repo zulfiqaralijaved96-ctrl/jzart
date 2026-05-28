@@ -4,6 +4,7 @@ import TrustedByCarousel from "@/components/marketing/TrustedByCarousel";
 import ProcessSection from "@/components/marketing/process/ProcessSection";
 import PortfolioSection from "@/components/marketing/portfolio/PortfolioSection";
 import { BrandedImagePlaceholder } from "@/components/ui/BrandedImagePlaceholder";
+import BrandLogo from "@/components/marketing/BrandLogo";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -178,8 +179,12 @@ export default async function HomePage() {
           <p className="t-label text-center mb-12">Proudly Serving Industry Leaders</p>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-12 items-center opacity-30 grayscale hover:grayscale-0 hover:opacity-80 transition-all duration-700">
             {partnerLogosWall.length > 0 ? partnerLogosWall.map((logo: any) => (
-              <div key={logo.id} className="relative mx-auto flex justify-center w-full" style={{ height: `${logo.height || 48}px` }}>
-                <Image src={logo.logoUrl} alt={logo.name} fill className="object-contain hover:scale-110 transition-transform" />
+              <div key={logo.id} className="relative mx-auto flex justify-center items-center w-full" style={{ height: `${logo.height || 48}px` }}>
+                {logo.logoUrl === "placeholder" ? (
+                  <BrandLogo name={logo.name} className="max-w-[85%] max-h-[85%] hover:scale-110 transition-transform" />
+                ) : (
+                  <Image src={logo.logoUrl} alt={logo.name} fill className="object-contain hover:scale-110 transition-transform" />
+                )}
               </div>
             )) : (
               <div className="col-span-full text-center opacity-50 text-sm">Our partners are currently being updated.</div>
