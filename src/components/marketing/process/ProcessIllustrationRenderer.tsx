@@ -34,7 +34,7 @@ export function ProcessIllustrationRenderer({
 
   // STEP 4 [4/7 - 5/7]: Fabric Application (Unified silhouette, smooth color transition)
   const opacity4 = useTransform(progress, [step * 4, step * 4 + fade, step * 5 - fade, step * 5], [0, 1, 1, 0]);
-  const color4 = useTransform(progress, [step * 4 + fade, step * 4.3], ["#e2e8f0", "var(--site-accent)"]);
+  const color4 = useTransform(progress, [step * 4 + fade, step * 4.3], ["#e2e8f0", "#ea580c"]);
 
   // STEP 5 [5/7 - 6/7]: Details (Hand Stitching + Facial Features)
   const opacity5 = useTransform(progress, [step * 5, step * 5 + fade, step * 6 - fade, step * 6], [0, 1, 1, 0]);
@@ -48,7 +48,7 @@ export function ProcessIllustrationRenderer({
   const bg = useTransform(
     progress, 
     [0, step * 3, step * 6], 
-    ["var(--site-bg-deep)", "var(--site-bg-alt)", "var(--site-bg-deep)"]
+    ["#0f0f12", "#1a1a1e", "#0f0f12"]
   );
 
   return (
