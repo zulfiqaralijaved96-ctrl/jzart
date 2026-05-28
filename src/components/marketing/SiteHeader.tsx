@@ -23,8 +23,8 @@ export default function SiteHeader({ logo }: SiteHeaderProps) {
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-8">
           <Link className="nav-link" href="/#process">The Process</Link>
-          <Link className="nav-link" href="/#portfolio">Portfolio</Link>
-          <Link className="nav-link" href="/contact">Studio</Link>
+          <Link className="nav-link" href="/portfolio">Portfolio</Link>
+          <Link className="nav-link" href="/studio">Studio</Link>
           <Link className="btn-primary px-6 py-2.5 rounded-full" href="/contact">
             Start Your Project
           </Link>
@@ -56,8 +56,8 @@ export default function SiteHeader({ logo }: SiteHeaderProps) {
         >
           <div className="flex flex-col p-6 gap-6">
             <Link className="nav-link text-lg font-medium" href="/#process" onClick={() => setIsMenuOpen(false)}>The Process</Link>
-            <Link className="nav-link text-lg font-medium" href="/#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
-            <Link className="nav-link text-lg font-medium" href="/contact" onClick={() => setIsMenuOpen(false)}>Studio</Link>
+            <Link className="nav-link text-lg font-medium" href="/portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</Link>
+            <Link className="nav-link text-lg font-medium" href="/studio" onClick={() => setIsMenuOpen(false)}>Studio</Link>
             <Link className="btn-primary py-3 rounded-full text-center mt-2 font-bold" href="/contact" onClick={() => setIsMenuOpen(false)}>
               Start Your Project
             </Link>

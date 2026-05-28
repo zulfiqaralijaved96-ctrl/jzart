@@ -44,9 +44,9 @@ export default async function MarketingLayout({ children }: { children: React.Re
               <h5 className="t-subheading mb-6">Explore</h5>
               <ul className="space-y-4">
                 {[
-                  { label: "Our Studio",              href: "/contact" },
+                  { label: "Our Studio",              href: "/studio" },
                   { label: "Manufacturing Process",   href: "/#process" },
-                  { label: "Character Portfolio",     href: "/#portfolio" },
+                  { label: "Character Portfolio",     href: "/portfolio" },
                   { label: "Contact Us",              href: "/contact" },
                 ].map((link) => (
                   <li key={link.label}>

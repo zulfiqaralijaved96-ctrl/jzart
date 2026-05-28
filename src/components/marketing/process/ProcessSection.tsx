@@ -79,11 +79,13 @@ export default function ProcessSection({ steps }: { steps?: any[] }) {
   const activeData = [INTRO_STAGE, ...mappedSteps];
 
   return (
-    <>
+    <div className="relative">
+      {/* Shared top anchor for the process section */}
+      <div id="process" className="absolute -top-20 pointer-events-none" />
+
       {/* ── DESKTOP STICKY SCROLL VIEW ── */}
       <section
         ref={containerRef}
-        id="process"
         className="hidden lg:block relative w-full"
         style={{ 
           // Tight pacing scroll height to eliminate giant empty zones
@@ -260,7 +262,6 @@ export default function ProcessSection({ steps }: { steps?: any[] }) {
 
       {/* ── MOBILE/TABLET NORMAL STATIC FLOW ── */}
       <section
-        id="process-mobile"
         className="block lg:hidden w-full h-auto py-16 px-6 relative"
         style={{ 
           backgroundColor: "var(--site-bg-deep)", 
@@ -311,6 +312,6 @@ export default function ProcessSection({ steps }: { steps?: any[] }) {
           })}
         </div>
       </section>
-    </>
+    </div>
   );
 }

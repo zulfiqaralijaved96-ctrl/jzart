@@ -121,7 +121,7 @@ export default async function HomePage() {
             <div className="w-24 h-1 mx-auto" style={{ backgroundColor: "var(--site-accent)" }} />
           </div>
           <div
-            className="relative group rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
+            className="relative group rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9] mb-12"
             style={{ border: "1px solid var(--site-border)", boxShadow: "var(--shadow-card)", backgroundColor: "var(--site-surface)" }}
           >
             <div className="absolute inset-0 z-10"
@@ -134,6 +134,16 @@ export default async function HomePage() {
             <div className="absolute bottom-8 left-8 z-20">
               <p className="t-label">{studioLocation}</p>
             </div>
+          </div>
+
+          <div className="text-center">
+            <Link
+              href="/studio"
+              className="inline-flex items-center gap-2 btn-primary px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03]"
+            >
+              Step Inside our Studio
+              <span className="material-symbols-outlined text-lg">door_open</span>
+            </Link>
           </div>
         </div>
       </section>

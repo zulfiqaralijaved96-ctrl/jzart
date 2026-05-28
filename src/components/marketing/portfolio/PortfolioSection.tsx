@@ -4,6 +4,7 @@ import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { BrandedImagePlaceholder } from "@/components/ui/BrandedImagePlaceholder";
 import Image from "next/image";
+import Link from "next/link";
 
 interface PortfolioItem {
   id: string;
@@ -81,6 +82,17 @@ export default function PortfolioSection({ items }: { items: PortfolioItem[] }) 
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* View Full Gallery Button */}
+        <div className="mt-16 text-center">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 btn-primary px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.03]"
+          >
+            Explore Complete Character Gallery
+            <span className="material-symbols-outlined text-lg">arrow_forward</span>
+          </Link>
+        </div>
       </div>
     </section>
   );
