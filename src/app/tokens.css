@@ -1,0 +1,680 @@
+/* =========================================================
+   JZ Arts — Design Token System
+   =========================================================
+   THE SINGLE SOURCE OF TRUTH for the entire website UI.
+
+   To change any visual property globally:
+   — Colors          → edit [data-theme="dark"] or [data-theme="light"]
+   — Font sizes      → edit --size-* primitives in :root
+   — Font weights    → edit --weight-* in :root
+   — Line heights    → edit --leading-* in :root
+   — Letter spacing  → edit --tracking-* in :root
+   — Type ramp       → edit --text-* semantic tokens in theme blocks
+   — Spacing layout  → edit --space-* in :root
+   — Border radius   → edit --radius-* in :root
+   — Animations      → edit --duration-* / --ease-* in :root
+   ========================================================= */
+
+
+/* =========================================================
+   SECTION 1 · PRIMITIVE TOKENS
+   Raw scale values. Theme blocks reference these.
+   Never referenced directly in components.
+   ========================================================= */
+:root {
+
+  /* ── Brand Oranges (New Accent) ── */
+  --color-orange-950: #431407;
+  --color-orange-900: #7c2d12;
+  --color-orange-800: #9a3412;
+  --color-orange-700: #c2410c;
+  --color-orange-600: #ea580c;
+  --color-orange-500: #f97316;
+  --color-orange-400: #fb923c;
+  --color-orange-300: #fdba74;
+  --color-orange-200: #fed7aa;
+  --color-orange-100: #ffedd5;
+  --color-orange-50:  #fff7ed;
+
+  /* ── Brand Blues (Retained for backwards compatibility if needed) ── */
+  --color-blue-950:  #0b1535;
+  --color-blue-900:  #0f1f4a;
+  --color-blue-800:  #1e3a8a;
+  --color-blue-700:  #1d4ed8;
+  --color-blue-600:  #2563eb;
+  --color-blue-500:  #3b82f6;
+  --color-blue-400:  #60a5fa;
+  --color-blue-300:  #93c5fd;
+  --color-blue-200:  #bfdbfe;
+  --color-blue-100:  #dbeafe;
+
+  /* ── Deep Ink / Charcoal (Dark Theme Backgrounds) ── */
+  --color-ink-1000: #0a0a0c;
+  --color-ink-950:  #0f0f12;
+  --color-ink-900:  #141417;
+  --color-ink-850:  #1a1a1e;
+  --color-ink-800:  #1e1e24;
+  --color-ink-750:  #24242b;
+  --color-ink-700:  #2a2a32;
+
+  /* ── Slates ── */
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50:  #f8fafc;
+
+  /* ── Ivory / Warm Whites (Light Theme) ── */
+  --color-ivory-50:  #faf9f6;
+  --color-ivory-100: #f5f4ef;
+  --color-ivory-200: #ede9e0;
+  --color-ivory-300: #dbd5c9;
+
+  /* ── Pure ── */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* ── Amber (Physical material colors — constant) ── */
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+
+  /* ──────────────────────────────────────────────
+     FONT FAMILIES
+     ────────────────────────────────────────────── */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    var(--font-inter), 'Inter', system-ui, sans-serif;
+
+  /* ──────────────────────────────────────────────
+     FONT SIZE PRIMITIVE SCALE
+     Edit these to change the entire type scale.
+     ────────────────────────────────────────────── */
+  --size-2xs:  0.625rem;   /*  10px */
+  --size-xs:   0.75rem;    /*  12px */
+  --size-sm:   0.875rem;   /*  14px */
+  --size-base: 1rem;       /*  16px */
+  --size-md:   1.125rem;   /*  18px */
+  --size-lg:   1.25rem;    /*  20px */
+  --size-xl:   1.5rem;     /*  24px */
+  --size-2xl:  1.875rem;   /*  30px */
+  --size-3xl:  2.25rem;    /*  36px */
+  --size-4xl:  3rem;       /*  48px */
+  --size-5xl:  3.75rem;    /*  60px */
+  --size-6xl:  4.5rem;     /*  72px */
+  --size-7xl:  5rem;       /*  80px */
+  --size-8xl:  6.5rem;     /* 104px */
+  --size-hero: clamp(3rem, 6vw, 5rem);     /* responsive hero title (reduced) */
+  --size-display: clamp(2.5rem, 5vw, 4.5rem); /* responsive section titles */
+
+  /* ──────────────────────────────────────────────
+     FONT WEIGHT SCALE
+     ────────────────────────────────────────────── */
+  --weight-light:     300;
+  --weight-normal:    400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+  --weight-black:     900;
+
+  /* ──────────────────────────────────────────────
+     LINE HEIGHT SCALE
+     ────────────────────────────────────────────── */
+  --leading-none:    1;
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose:   2;
+
+  /* ──────────────────────────────────────────────
+     LETTER SPACING SCALE
+     ────────────────────────────────────────────── */
+  --tracking-tightest: -0.05em;
+  --tracking-tighter:  -0.03em;
+  --tracking-tight:    -0.02em;
+  --tracking-normal:    0em;
+  --tracking-wide:      0.05em;
+  --tracking-wider:     0.1em;
+  --tracking-widest:    0.2em;
+
+  /* ──────────────────────────────────────────────
+     SPACING LAYOUT SCALE
+     ────────────────────────────────────────────── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ──────────────────────────────────────────────
+     BORDER RADIUS SCALE
+     ────────────────────────────────────────────── */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
+  --radius-2xl:  2rem;
+  --radius-3xl:  3rem;
+  --radius-full: 9999px;
+
+  /* ──────────────────────────────────────────────
+     MOTION TOKENS
+     ────────────────────────────────────────────── */
+  --duration-fast:   150ms;
+  --duration-base:   250ms;
+  --duration-slow:   500ms;
+  --duration-slower: 700ms;
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Brand Logo Size ── */
+  --site-logo-height: 3.5rem; /* ~56px */
+}
+
+
+/* =========================================================
+   SECTION 2 · SEMANTIC TOKENS — DARK THEME (default)
+   Cinematic deep ink/charcoal. Edit values here to change
+   the entire dark mode look in one place.
+   ========================================================= */
+:root,
+[data-theme="dark"] {
+
+  /* ── Backgrounds ── */
+  --site-bg:       var(--color-ink-900);    /* page base bg     */
+  --site-bg-alt:   var(--color-ink-850);    /* section alt bg   */
+  --site-bg-deep:  var(--color-ink-950);    /* hero / dark deep  */
+  --site-surface:  var(--color-ink-800);    /* elevated surface */
+  --site-card:     var(--color-ink-750);    /* card face        */
+
+  /* ── Text Colors ── */
+  --site-text:       var(--color-white);
+  --site-text-muted: var(--color-slate-400);
+  --site-text-faint: var(--color-slate-500);
+  --site-text-hero:  var(--color-white);
+  --site-text-label: var(--color-slate-300);
+
+  /* ── Borders ── */
+  --site-border:        rgba(255,255,255,0.06);
+  --site-border-strong: rgba(255,255,255,0.12);
+  --site-border-accent: rgba(249,115,22,0.25); /* Orange border */
+
+  /* ── Accent (Brand Orange) ── */
+  --site-accent:       var(--color-orange-600);
+  --site-accent-hover: var(--color-orange-500);
+  --site-accent-soft:  rgba(234,88,12,0.12);
+  --site-accent-text:  var(--color-orange-400);
+  --site-accent-glow:  rgba(234,88,12,0.4);
+
+  /* ── Glow ── */
+  --site-glow:        rgba(234,88,12,0.05);
+  --site-glow-strong: rgba(234,88,12,0.12);
+
+  /* ── Navigation ── */
+  --site-nav-bg:   rgba(255,255,255,0.15); /* Glassy translucent light */
+  --site-nav-text: var(--color-white); /* White text on glassy nav */
+
+  /* ── Overlays ── */
+  --site-overlay:     rgba(15,15,18,0.9);
+  --site-overlay-mid: rgba(15,15,18,0.5);
+
+  /* ── Shadows ── */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 40px rgba(234,88,12,0.15);
+  --shadow-hero: 0 40px 80px -20px rgba(0,0,0,0.95);
+
+  /* ── Blueprint visual (Orange/Amber to match brand) ── */
+  --blueprint-dot:  var(--color-orange-600);
+  --blueprint-line: var(--color-orange-500);
+
+  /* ──────────────────────────────────────────────
+     SEMANTIC TYPOGRAPHY TOKENS — DARK THEME
+     All font sizes, weights, spacing for each
+     text role. Edit here to change every instance.
+     ────────────────────────────────────────────── */
+
+  /* Heading font — dark uses clean sans */
+  --site-heading-font:  var(--font-body);
+  --site-body-font:     var(--font-body);
+
+  /* Hero title (massive screen-filling text) */
+  --type-hero-size:       var(--size-hero);
+  --type-hero-weight:     var(--weight-black);
+  --type-hero-leading:    var(--leading-tight);
+  --type-hero-tracking:   var(--tracking-tighter);
+  --type-hero-color:      var(--site-text-hero);
+
+  /* Display / section headline (h2-level) */
+  --type-display-size:    var(--size-display);
+  --type-display-weight:  var(--weight-black);
+  --type-display-leading: var(--leading-tight);
+  --type-display-tracking:var(--tracking-tight);
+  --type-display-color:   var(--site-text);
+
+  /* Heading h3-level */
+  --type-heading-size:    var(--size-4xl);
+  --type-heading-weight:  var(--weight-black);
+  --type-heading-leading: var(--leading-snug);
+  --type-heading-tracking:var(--tracking-tight);
+  --type-heading-color:   var(--site-text);
+
+  /* Subheading / card title */
+  --type-subheading-size:    var(--size-xl);
+  --type-subheading-weight:  var(--weight-bold);
+  --type-subheading-leading: var(--leading-snug);
+  --type-subheading-tracking:var(--tracking-normal);
+  --type-subheading-color:   var(--site-text);
+
+  /* Body lead / intro text */
+  --type-lead-size:    var(--size-xl);
+  --type-lead-weight:  var(--weight-light);
+  --type-lead-leading: var(--leading-relaxed);
+  --type-lead-color:   var(--site-text-muted);
+
+  /* Body default */
+  --type-body-size:    var(--size-base);
+  --type-body-weight:  var(--weight-normal);
+  --type-body-leading: var(--leading-normal);
+  --type-body-color:   var(--site-text-muted);
+
+  /* Small / meta text */
+  --type-small-size:    var(--size-sm);
+  --type-small-weight:  var(--weight-normal);
+  --type-small-leading: var(--leading-normal);
+  --type-small-color:   var(--site-text-faint);
+
+  /* Label / overline text (uppercase badge labels) */
+  --type-label-size:     var(--size-xs);
+  --type-label-weight:   var(--weight-bold);
+  --type-label-leading:  var(--leading-none);
+  --type-label-tracking: var(--tracking-widest);
+  --type-label-color:    var(--site-text-faint);
+
+  /* Accent label (colored badge / section tag) */
+  --type-accent-label-color: var(--site-accent-text);
+
+  /* Nav link */
+  --type-nav-size:    var(--size-sm);
+  --type-nav-weight:  var(--weight-medium);
+  --type-nav-color:   var(--site-nav-text);
+
+  /* Button text */
+  --type-btn-size:    var(--size-sm);
+  --type-btn-weight:  var(--weight-bold);
+
+  /* Step number (giant decorative "01") */
+  --type-step-size:    var(--size-8xl);
+  --type-step-weight:  var(--weight-black);
+  --type-step-leading: var(--leading-none);
+  --type-step-color:   color-mix(in srgb, var(--site-accent) 20%, transparent);
+
+  /* Section counter subtitle text */
+  --type-section-tag-size:    var(--size-xs);
+  --type-section-tag-weight:  var(--weight-bold);
+  --type-section-tag-tracking:var(--tracking-widest);
+  --type-section-tag-color:   var(--site-accent-text);
+}
+
+
+/* =========================================================
+   SECTION 3 · SEMANTIC TOKENS — LIGHT THEME
+   Premium ivory editorial. Edit values here to change
+   the entire light mode look in one place.
+   ========================================================= */
+[data-theme="light"] {
+
+  /* ── Backgrounds ── */
+  --site-bg:       var(--color-ivory-50);
+  --site-bg-alt:   var(--color-white);
+  --site-bg-deep:  var(--color-ivory-100);
+  --site-surface:  var(--color-white);
+  --site-card:     var(--color-white);
+
+  /* ── Text Colors ── */
+  --site-text:       #1a1a1a; /* Charcoal text */
+  --site-text-muted: var(--color-slate-600);
+  --site-text-faint: var(--color-slate-500);
+  --site-text-hero:  #1a1a1a;
+  --site-text-label: var(--color-slate-700);
+
+  /* ── Borders ── */
+  --site-border:        rgba(0,0,0,0.06);
+  --site-border-strong: rgba(0,0,0,0.12);
+  --site-border-accent: rgba(234,88,12,0.25);
+
+  /* ── Accent (Brand Orange) ── */
+  --site-accent:       var(--color-orange-600);
+  --site-accent-hover: var(--color-orange-700);
+  --site-accent-soft:  rgba(234,88,12,0.08); /* Soft peach/orange background */
+  --site-accent-text:  var(--color-orange-600);
+  --site-accent-glow:  rgba(234,88,12,0.25);
+
+  /* ── Glow ── */
+  --site-glow:        rgba(234,88,12,0.05);
+  --site-glow-strong: rgba(234,88,12,0.10);
+
+  /* ── Navigation ── */
+  --site-nav-bg:   rgba(250,249,246,0.94);
+  --site-nav-text: var(--color-slate-700);
+
+  /* ── Overlays ── */
+  --site-overlay:     rgba(250,249,246,0.94);
+  --site-overlay-mid: rgba(250,249,246,0.6);
+
+  /* ── Shadows ── */
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.02);
+  --shadow-glow: 0 0 32px rgba(234,88,12,0.10);
+  --shadow-hero: 0 32px 64px -16px rgba(0,0,0,0.15);
+
+  /* ── Blueprint visual ── */
+  --blueprint-dot:  var(--color-orange-600);
+  --blueprint-line: var(--color-orange-500);
+
+  /* ──────────────────────────────────────────────
+     SEMANTIC TYPOGRAPHY TOKENS — LIGHT THEME
+     Light uses serif display font for headings.
+     ────────────────────────────────────────────── */
+
+  --site-heading-font: var(--font-display);
+  --site-body-font:    var(--font-body);
+
+  /* Hero title */
+  --type-hero-size:       var(--size-hero);
+  --type-hero-weight:     var(--weight-black);
+  --type-hero-leading:    var(--leading-tight);
+  --type-hero-tracking:   var(--tracking-tight);
+  --type-hero-color:      var(--site-text-hero);
+
+  /* Display */
+  --type-display-size:     var(--size-display);
+  --type-display-weight:   var(--weight-bold);
+  --type-display-leading:  var(--leading-tight);
+  --type-display-tracking: var(--tracking-tight);
+  --type-display-color:    var(--site-text);
+
+  /* Heading */
+  --type-heading-size:     var(--size-3xl);
+  --type-heading-weight:   var(--weight-bold);
+  --type-heading-leading:  var(--leading-snug);
+  --type-heading-tracking: var(--tracking-tight);
+  --type-heading-color:    var(--site-text);
+
+  /* Subheading */
+  --type-subheading-size:     var(--size-xl);
+  --type-subheading-weight:   var(--weight-semibold);
+  --type-subheading-leading:  var(--leading-snug);
+  --type-subheading-tracking: var(--tracking-normal);
+  --type-subheading-color:    var(--site-text);
+
+  /* Lead / intro */
+  --type-lead-size:    var(--size-lg);
+  --type-lead-weight:  var(--weight-normal);
+  --type-lead-leading: var(--leading-relaxed);
+  --type-lead-color:   var(--site-text-muted);
+
+  /* Body */
+  --type-body-size:    var(--size-base);
+  --type-body-weight:  var(--weight-normal);
+  --type-body-leading: var(--leading-normal);
+  --type-body-color:   var(--site-text-muted);
+
+  /* Small */
+  --type-small-size:    var(--size-sm);
+  --type-small-weight:  var(--weight-normal);
+  --type-small-leading: var(--leading-normal);
+  --type-small-color:   var(--site-text-faint);
+
+  /* Label */
+  --type-label-size:     var(--size-xs);
+  --type-label-weight:   var(--weight-bold);
+  --type-label-leading:  var(--leading-none);
+  --type-label-tracking: var(--tracking-widest);
+  --type-label-color:    var(--site-text-faint);
+
+  --type-accent-label-color: var(--site-accent-text);
+
+  /* Nav */
+  --type-nav-size:    var(--size-sm);
+  --type-nav-weight:  var(--weight-medium);
+  --type-nav-color:   var(--site-nav-text);
+
+  /* Button */
+  --type-btn-size:    var(--size-sm);
+  --type-btn-weight:  var(--weight-bold);
+
+  /* Step number */
+  --type-step-size:    var(--size-8xl);
+  --type-step-weight:  var(--weight-black);
+  --type-step-leading: var(--leading-none);
+  --type-step-color:   color-mix(in srgb, var(--site-accent) 15%, transparent);
+
+  /* Section tag */
+  --type-section-tag-size:     var(--size-xs);
+  --type-section-tag-weight:   var(--weight-bold);
+  --type-section-tag-tracking: var(--tracking-widest);
+  --type-section-tag-color:    var(--site-accent-text);
+}
+
+
+/* =========================================================
+   SECTION 4 · TYPOGRAPHY UTILITY CLASSES
+   Components use these classNames. Values come from
+   semantic tokens above — just edit tokens.css.
+   ========================================================= */
+
+/* Page wrapper */
+.site-page {
+  background-color: var(--site-bg);
+  color: var(--site-text);
+  font-family: var(--site-body-font);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+/* — Type ramp — */
+
+.t-hero {
+  font-family: var(--site-heading-font);
+  font-size: var(--type-hero-size);
+  font-weight: var(--type-hero-weight);
+  line-height: var(--type-hero-leading);
+  letter-spacing: var(--type-hero-tracking);
+  color: var(--type-hero-color);
+}
+
+.t-display {
+  font-family: var(--site-heading-font);
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-tracking);
+  color: var(--type-display-color);
+}
+
+.t-heading {
+  font-family: var(--site-heading-font);
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-heading-leading);
+  letter-spacing: var(--type-heading-tracking);
+  color: var(--type-heading-color);
+}
+
+.t-subheading {
+  font-family: var(--site-heading-font);
+  font-size: var(--type-subheading-size);
+  font-weight: var(--type-subheading-weight);
+  line-height: var(--type-subheading-leading);
+  letter-spacing: var(--type-subheading-tracking);
+  color: var(--type-subheading-color);
+}
+
+.t-lead {
+  font-size: var(--type-lead-size);
+  font-weight: var(--type-lead-weight);
+  line-height: var(--type-lead-leading);
+  color: var(--type-lead-color);
+}
+
+.t-body {
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  color: var(--type-body-color);
+}
+
+.t-small {
+  font-size: var(--type-small-size);
+  font-weight: var(--type-small-weight);
+  line-height: var(--type-small-leading);
+  color: var(--type-small-color);
+}
+
+.t-label {
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  line-height: var(--type-label-leading);
+  letter-spacing: var(--type-label-tracking);
+  color: var(--type-label-color);
+  text-transform: uppercase;
+}
+
+.t-accent-label {
+  font-size: var(--type-section-tag-size);
+  font-weight: var(--type-section-tag-weight);
+  letter-spacing: var(--type-section-tag-tracking);
+  color: var(--type-section-tag-color);
+  text-transform: uppercase;
+}
+
+.t-step {
+  font-size: var(--type-step-size);
+  font-weight: var(--type-step-weight);
+  line-height: var(--type-step-leading);
+  color: var(--type-step-color);
+}
+
+.t-nav {
+  font-size: var(--type-nav-size);
+  font-weight: var(--type-nav-weight);
+  color: var(--type-nav-color);
+}
+
+/* Color-only overrides (used alongside t-* classes) */
+.t-muted  { color: var(--site-text-muted); }
+.t-faint  { color: var(--site-text-faint); }
+.t-accent { color: var(--site-accent-text); }
+.t-white  { color: var(--color-white); }
+
+
+/* =========================================================
+   SECTION 5 · SURFACE UTILITY CLASSES
+   ========================================================= */
+.site-bg       { background-color: var(--site-bg); }
+.site-bg-alt   { background-color: var(--site-bg-alt); }
+.site-bg-deep  { background-color: var(--site-bg-deep); }
+.site-surface  { background-color: var(--site-surface); }
+.site-card     { background-color: var(--site-card); }
+
+
+/* =========================================================
+   SECTION 6 · CSS-ONLY HOVER & INTERACTIVE CLASSES
+   Safe for Server Components (no JS event handlers).
+   ========================================================= */
+
+/* Theme toggling utilities */
+.show-in-dark { display: none !important; }
+.show-in-light { display: block !important; }
+
+[data-theme="dark"] .show-in-dark { display: block !important; }
+[data-theme="dark"] .show-in-light { display: none !important; }
+
+/* Nav links */
+.nav-link {
+  color: var(--type-nav-color);
+  font-size: var(--type-nav-size);
+  font-weight: var(--type-nav-weight);
+  transition: color var(--duration-base) var(--ease-out);
+}
+.nav-link:hover { color: var(--site-accent-text); }
+
+/* Primary CTA button */
+.btn-primary {
+  background-color: var(--site-accent);
+  color: var(--color-white);
+  font-size: var(--type-btn-size);
+  font-weight: var(--type-btn-weight);
+  box-shadow: 0 12px 32px var(--site-accent-glow);
+  transition: background-color var(--duration-base) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-base) var(--ease-out);
+}
+.btn-primary:hover  { background-color: var(--site-accent-hover); transform: scale(1.05); }
+.btn-primary:active { transform: scale(0.97); }
+
+/* Secondary button */
+.btn-secondary {
+  background-color: var(--site-surface);
+  border: 1px solid var(--site-border);
+  color: var(--site-text);
+  font-size: var(--type-btn-size);
+  font-weight: var(--type-btn-weight);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+.btn-secondary:hover { background-color: var(--site-card); }
+
+/* Filter / tag button */
+.filter-btn {
+  background-color: var(--site-surface);
+  border: 1px solid var(--site-border);
+  color: var(--site-text-muted);
+  font-size: var(--type-small-size);
+  font-weight: var(--type-btn-weight);
+  transition: background-color var(--duration-base) var(--ease-out),
+              color var(--duration-base) var(--ease-out);
+}
+.filter-btn:hover { background-color: var(--site-card); color: var(--site-text); }
+
+/* Footer links */
+.footer-link {
+  color: var(--site-text-faint);
+  font-size: var(--type-small-size);
+  transition: color var(--duration-base) var(--ease-out);
+}
+.footer-link:hover { color: var(--site-accent-text); }
+
+/* Hover: surface → accent bg (social icons) */
+.hover-accent-bg {
+  background-color: var(--site-surface);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+.hover-accent-bg:hover { background-color: var(--site-accent); }
+
+/* Hover: faint → site-text */
+.hover-text {
+  color: var(--site-text-faint);
+  transition: color var(--duration-base) var(--ease-out);
+}
+.hover-text:hover { color: var(--site-text); }
+
+/* Generic selection */
+::selection {
+  background-color: var(--site-accent);
+  color: #ffffff;
+}

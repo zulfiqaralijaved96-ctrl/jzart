@@ -1,0 +1,210 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+  role          String    @default("USER")
+  accounts      Account[]
+  sessions      Session[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  company     String?
+  mascotType  String?
+  quantity    Int      @default(1)
+  budget      String?
+  status      String   @default("NEW") // NEW, CONTACTED, QUALIFIED, LOST
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  quotes      Quote[]
+}
+
+model Client {
+  id          String    @id @default(cuid())
+  name        String
+  company     String?
+  email       String
+  phone       String?
+  address     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[]
+  quotes      Quote[]
+}
+
+model Quote {
+  id          String   @id @default(cuid())
+  leadId      String?
+  clientId    String?
+  total       Decimal  @default(0.00)
+  status      String   @default("DRAFT") // DRAFT, SENT, ACCEPTED, REJECTED
+  items       String?
+  expireAt    DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lead   Lead?   @relation(fields: [leadId], references: [id])
+  client Client? @relation(fields: [clientId], references: [id])
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  clientId    String
+  title       String
+  status      String   @default("PLANNING") // PLANNING, PRODUCING, SHIPPED, COMPLETED
+  startDate   DateTime?
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tasks       Task[]
+  media       Media[]
+
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  projectId   String
+  title       String
+  description String?
+  isCompleted Boolean  @default(false)
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Media {
+  id          String   @id @default(cuid())
+  projectId   String
+  url         String
+  fileType    String?
+  createdAt   DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model SiteSettings {
+  id           String   @id @default(cuid())
+  siteName     String   @default("JZ Arts")
+  logoUrl      String?
+  logoUrlDark  String?
+  logoHeight   Int      @default(56)
+  primaryColor String   @default("#f97316") // Orange
+  heroBadge    String   @default("Est. 1996")
+  heroTitle    String   @default("Custom Mascots<br/>That Bring<br/><span class=\"t-accent\">Brands to Life</span>")
+  heroSubtitle String   @default("Premium mascot manufacturing trusted by global brands. Experience the fusion of artistry and engineering.")
+  heroImageUrl String   @default("/uploads/local_asset_1.png")
+  studioTitle  String   @default("Over 20 Years of<br/>Mascot Craftsmanship")
+  studioLocation String @default("Our Studio / Manila, Philippines")
+  studioImageUrl String @default("/uploads/local_asset_2.png")
+  finalRevealTitle String @default("The Final Character<br/>Comes to Life")
+  finalRevealVideo String @default("/uploads/local_asset_3.png")
+  updatedAt    DateTime @updatedAt
+}
+
+model PartnerLogo {
+  id        String   @id @default(cuid())
+  name      String
+  logoUrl   String
+  section   String   @default("HERO") // HERO or WALL
+  height    Int      @default(48)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProcessStep {
+  id               String   @id @default(cuid())
+  stepNumber       String
+  title            String
+  description      String
+  imageUrl         String   @default("")
+  illustrationType String   @default("animation") // animation, lottie, video, image
+  assetLight       String?  
+  assetDark        String?
+  transitionStyle  String?
+  backgroundStyle  String?
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model PortfolioItem {
+  id               String   @id @default(cuid())
+  title            String
+  slug             String   @unique
+  clientName       String?
+  category         String   @default("Corporate")
+  industry         String?
+  description      String?
+  coverImage       String
+  thumbnailImage   String?
+  galleryImages    String?  // JSON string array of URLs
+  featured         Boolean  @default(false)
+  isPublished      Boolean  @default(true)
+  year             String?
+  tags             String?  // Comma separated
+  themeAccentOptional String? 
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
