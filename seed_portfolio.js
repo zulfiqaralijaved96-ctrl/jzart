@@ -34,7 +34,7 @@ async function main() {
       coverImage: "https://images.unsplash.com/photo-1531746790731-6bc0fbce2bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", // Robot costume
       thumbnailImage: "https://images.unsplash.com/photo-1531746790731-6bc0fbce2bf0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       galleryImages: JSON.stringify([
-        "/uploads/local_asset_28.jpg"
+        "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_28.jpg"
       ]),
       featured: true,
       isPublished: true,
@@ -64,8 +64,8 @@ async function main() {
       category: "Sports",
       industry: "Education",
       description: "A sleek, intimidating panther design combining high-performance spandex segments with targeted muscle-sculpting padding to create an athletic, powerful silhouette.",
-      coverImage: "/uploads/local_asset_31.jpg", // Panther/Tiger mascot
-      thumbnailImage: "/uploads/local_asset_32.jpg",
+      coverImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_31.jpg", // Panther/Tiger mascot
+      thumbnailImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_32.jpg",
       featured: false,
       isPublished: true,
       order: 4
@@ -107,8 +107,8 @@ async function main() {
       category: "Entertainment",
       industry: "Events",
       description: "A magical, oversized seasonal character designed for an annual winter festival. Frosty was built with specialized glittering white faux fur and an internal cooling vest for the performer, ensuring comfort during long holiday parades.",
-      coverImage: "/uploads/local_asset_37.jpg", // Snowman style costume
-      thumbnailImage: "/uploads/local_asset_38.jpg",
+      coverImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_37.jpg", // Snowman style costume
+      thumbnailImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_38.jpg",
       featured: false,
       isPublished: true,
       year: "2022",
@@ -122,8 +122,8 @@ async function main() {
       category: "Sports",
       industry: "Sports",
       description: "A fierce dragon mascot with articulated wings and an internal LED system in the mouth to simulate breathing fire. Built strictly for the ice, Blaze features special gripping outsoles for safe performance on hockey rinks.",
-      coverImage: "/uploads/local_asset_39.jpg", // Mascot suit
-      thumbnailImage: "/uploads/local_asset_40.jpg",
+      coverImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_39.jpg", // Mascot suit
+      thumbnailImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_40.jpg",
       featured: true,
       isPublished: true,
       year: "2024",
@@ -165,8 +165,8 @@ async function main() {
       category: "Corporate",
       industry: "Food & Beverage",
       description: "A nostalgic retro remake of a classic burger mascot. Features intricate hand-painted foam detailing to simulate a real cheeseburger, combined with tailored plush clothing.",
-      coverImage: "/uploads/local_asset_45.jpg", // Object costume
-      thumbnailImage: "/uploads/local_asset_46.jpg",
+      coverImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_45.jpg", // Object costume
+      thumbnailImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_46.jpg",
       featured: true,
       isPublished: true,
       year: "2021",
@@ -179,8 +179,8 @@ async function main() {
       category: "Entertainment",
       industry: "Gaming",
       description: "A promotional walkaround suit created for a localized event. Accurately scaled and painted to match iconic pantone colors, designed for sprinting and jumping safely.",
-      coverImage: "/uploads/local_asset_47.jpg", // Racing mascot
-      thumbnailImage: "/uploads/local_asset_48.jpg",
+      coverImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_47.jpg", // Racing mascot
+      thumbnailImage: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/local_asset_48.jpg",
       featured: false,
       isPublished: true,
       order: 12

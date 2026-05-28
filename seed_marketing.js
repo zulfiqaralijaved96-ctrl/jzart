@@ -11,9 +11,9 @@ async function main() {
     await prisma.siteSettings.update({
       where: { id: existingSettings.id },
       data: {
-        heroImageUrl: "/uploads/hero_mascot.jpg",
-        studioImageUrl: "/uploads/studio_mascot.jpg",
-        finalRevealVideo: "/uploads/video_mascot.jpg"
+        heroImageUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/hero_mascot.jpg",
+        studioImageUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/studio_mascot.jpg",
+        finalRevealVideo: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/video_mascot.jpg"
       }
     });
     console.log("Updated SiteSettings with local mascot images.");
@@ -24,12 +24,12 @@ async function main() {
         heroBadge: "Premium Mascot Fabricators",
         heroTitle: 'High-End Custom Mascots<br/>Built for<br/><span class="t-accent">Maximum Performance</span>',
         heroSubtitle: "Exquisite physical mascot manufacturing featuring high-grade foam carving, custom-engineered ventilation, and ergonomic comfort. Built for ultimate durability and high-impact brand presence.",
-        heroImageUrl: "/uploads/hero_mascot.jpg",
+        heroImageUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/hero_mascot.jpg",
         studioTitle: "Over 20 Years of<br/>Fabrication & Foam Carving",
         studioLocation: "Our Workshop / Manila, Philippines",
-        studioImageUrl: "/uploads/studio_mascot.jpg",
+        studioImageUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/studio_mascot.jpg",
         finalRevealTitle: "The Engineered Character<br/>Comes to Life",
-        finalRevealVideo: "/uploads/video_mascot.jpg"
+        finalRevealVideo: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/video_mascot.jpg"
       }
     });
     console.log("Created SiteSettings with local mascot images.");
@@ -51,12 +51,12 @@ async function main() {
   }
   
   const wallLogos = [
-    { name: "Client 1", logoUrl: "/uploads/logo.svg", section: "WALL", order: 1 },
-    { name: "Client 2", logoUrl: "/uploads/logo.svg", section: "WALL", order: 2 },
-    { name: "Client 3", logoUrl: "/uploads/logo.svg", section: "WALL", order: 3 },
-    { name: "Client 4", logoUrl: "/uploads/logo.svg", section: "WALL", order: 4 },
-    { name: "Client 5", logoUrl: "/uploads/logo.svg", section: "WALL", order: 5 },
-    { name: "Client 6", logoUrl: "/uploads/logo.svg", section: "WALL", order: 6 },
+    { name: "Client 1", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 1 },
+    { name: "Client 2", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 2 },
+    { name: "Client 3", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 3 },
+    { name: "Client 4", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 4 },
+    { name: "Client 5", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 5 },
+    { name: "Client 6", logoUrl: "https://mpiirvcygcqhiwcdxxfu.supabase.co/storage/v1/object/public/mascot-assets/logo.svg", section: "WALL", order: 6 },
   ];
   
   for (const logo of wallLogos) {

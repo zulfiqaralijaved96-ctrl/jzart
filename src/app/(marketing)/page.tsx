@@ -31,7 +31,7 @@ export default async function HomePage() {
 
       {/* ── HERO ── */}
       <section
-        className="relative pt-24 pb-16 lg:pt-32 lg:pb-32 overflow-visible min-h-[75vh]"
+        className="relative pt-24 pb-16 lg:pt-32 lg:pb-32 overflow-hidden min-h-[75vh]"
         style={{ backgroundColor: "var(--site-bg-deep)" }}
       >
         <div className="max-w-[1400px] w-full mx-auto px-6 relative">
@@ -120,7 +120,7 @@ export default async function HomePage() {
             <div className="w-24 h-1 mx-auto" style={{ backgroundColor: "var(--site-accent)" }} />
           </div>
           <div
-            className="relative group rounded-2xl overflow-hidden aspect-[21/9]"
+            className="relative group rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]"
             style={{ border: "1px solid var(--site-border)", boxShadow: "var(--shadow-card)", backgroundColor: "var(--site-surface)" }}
           >
             <div className="absolute inset-0 z-10"
@@ -189,7 +189,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-32 relative" id="contact" style={{ backgroundColor: "var(--site-bg-alt)" }}>
+      <section className="py-32 relative overflow-hidden" id="contact" style={{ backgroundColor: "var(--site-bg-alt)" }}>
         <div className="absolute inset-0 opacity-10 overflow-hidden pointer-events-none">
           <div className="grid grid-cols-6 gap-2 rotate-12 -translate-y-20 absolute -inset-20">
             {[...portfolioItems, ...portfolioItems].map((item: any, i: number) => (

@@ -55,31 +55,31 @@ export function PortfolioDetailModal({ item, onClose }: PortfolioDetailModalProp
           {/* Modal Container */}
           <motion.div
             layoutId={`card-container-${item.id}`}
-            className="relative w-full max-w-6xl max-h-[90vh] md:h-[85vh] rounded-b-none md:rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row pointer-events-auto mt-auto md:mt-0"
+            className="relative w-full max-w-6xl max-h-[92vh] md:max-h-[85vh] md:h-[85vh] rounded-t-3xl md:rounded-3xl shadow-2xl overflow-y-auto md:overflow-hidden flex flex-col md:flex-row pointer-events-auto mt-auto md:mt-0"
             style={{ backgroundColor: "var(--site-surface)" }}
             transition={{ type: "spring", bounce: 0, duration: 0.6 }}
           >
             {/* Close Button */}
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 z-50 p-2 bg-black/20 hover:bg-black/40 backdrop-blur-md rounded-full text-white transition-colors"
+              className="absolute top-4 right-4 md:top-6 md:right-6 z-50 p-2 bg-black/40 hover:bg-black/60 backdrop-blur-md rounded-full text-white transition-colors"
             >
-              <span className="material-symbols-outlined block">close</span>
+              <span className="material-symbols-outlined block text-base md:text-xl">close</span>
             </button>
 
-            {/* Left side: Scrollable Image Gallery */}
+            {/* Left side: Images (Stacked vertically on mobile, scrollable on desktop) */}
             <div 
-              className="w-full md:w-2/3 h-[50vh] md:h-full overflow-y-auto hide-scrollbar scroll-smooth"
+              className="w-full md:w-2/3 h-auto md:h-full flex flex-col md:overflow-y-auto hide-scrollbar scroll-smooth"
               style={{ backgroundColor: "var(--site-bg-alt)" }}
             >
               {/* Hero Cover */}
               {item.coverImage ? (
                 <div 
-                  className="w-full h-[50vh] md:h-full bg-cover bg-center shrink-0" 
+                  className="w-full aspect-[4/3] md:aspect-auto md:h-full bg-cover bg-center shrink-0" 
                   style={{ backgroundImage: `url('${item.coverImage}')` }}
                 />
               ) : (
-                <div className="w-full h-[50vh] md:h-full shrink-0">
+                <div className="w-full aspect-[4/3] md:aspect-auto md:h-full shrink-0">
                   <BrandedImagePlaceholder />
                 </div>
               )}
@@ -89,11 +89,11 @@ export function PortfolioDetailModal({ item, onClose }: PortfolioDetailModalProp
                 imgUrl ? (
                   <div 
                     key={i}
-                    className="w-full h-[50vh] md:h-full bg-cover bg-center shrink-0" 
+                    className="w-full aspect-[4/3] md:aspect-auto md:h-full bg-cover bg-center shrink-0" 
                     style={{ backgroundImage: `url('${imgUrl}')` }}
                   />
                 ) : (
-                  <div key={i} className="w-full h-[50vh] md:h-full shrink-0">
+                  <div key={i} className="w-full aspect-[4/3] md:aspect-auto md:h-full shrink-0">
                     <BrandedImagePlaceholder />
                   </div>
                 )
@@ -102,7 +102,7 @@ export function PortfolioDetailModal({ item, onClose }: PortfolioDetailModalProp
 
             {/* Right side: Editorial Content */}
             <div 
-              className="w-full md:w-1/3 h-[40vh] md:h-full overflow-y-auto p-8 md:p-12 border-l"
+              className="w-full md:w-1/3 h-auto md:h-full overflow-y-auto p-6 sm:p-8 md:p-12 border-t md:border-t-0 md:border-l"
               style={{ backgroundColor: "var(--site-surface)", borderColor: "var(--site-border)" }}
             >
               <motion.div

@@ -110,7 +110,7 @@
   --size-6xl:  4.5rem;     /*  72px */
   --size-7xl:  5rem;       /*  80px */
   --size-8xl:  6.5rem;     /* 104px */
-  --size-hero: clamp(3rem, 6vw, 5rem);     /* responsive hero title (reduced) */
+  --size-hero: clamp(2.25rem, 6vw, 5rem);     /* responsive hero title (reduced) */
   --size-display: clamp(2.5rem, 5vw, 4.5rem); /* responsive section titles */
 
   /* ──────────────────────────────────────────────

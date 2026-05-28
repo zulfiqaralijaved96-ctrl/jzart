@@ -7,11 +7,21 @@
   --color-accent: #2563eb;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--site-bg);
   color: var(--site-text);
   font-family: var(--font-body, var(--font-inter), system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
+}
+
+.site-page {
+  overflow-x: hidden;
 }
 
 ::selection {

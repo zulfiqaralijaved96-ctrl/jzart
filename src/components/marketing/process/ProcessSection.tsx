@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence, useMotionValue } from "framer-motion";
 import { ProcessIllustrationRenderer } from "./ProcessIllustrationRenderer";
 import { BrandedImagePlaceholder } from "@/components/ui/BrandedImagePlaceholder";
 
@@ -44,183 +44,274 @@ export default function ProcessSection({ steps }: { steps?: any[] }) {
   // Inject the new Step 0 for pacing and introductory stillness
   const activeData = [INTRO_STAGE, ...mappedSteps];
 
+  // 7 static progress values defined at top-level to perfectly comply with the Rules of Hooks
+  const progress0 = useMotionValue(0.5 / 7);
+  const progress1 = useMotionValue(1.5 / 7);
+  const progress2 = useMotionValue(2.5 / 7);
+  const progress3 = useMotionValue(3.5 / 7);
+  const progress4 = useMotionValue(4.5 / 7);
+  const progress5 = useMotionValue(5.5 / 7);
+  const progress6 = useMotionValue(6.5 / 7);
+  
+  const staticProgressValues = [progress0, progress1, progress2, progress3, progress4, progress5, progress6];
+
   return (
-    <section
-      ref={containerRef}
-      className="relative w-full"
-      style={{ 
-        // 7 stages now. We extend height logic to spread it out and slow the user down
-        height: `${activeData.length * 110}vh`,
-        backgroundColor: "var(--site-bg-deep)", 
-        color: "var(--site-text)" 
-      }}
-    >
-      {/* Sticky Container locks the view for N viewports */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
+    <div className="w-full">
+      {/* ── DESKTOP STICKY VERSION ── */}
+      <section
+        ref={containerRef}
+        className="hidden lg:block relative w-full"
+        style={{ 
+          height: `${activeData.length * 110}vh`,
+          backgroundColor: "var(--site-bg-deep)", 
+          color: "var(--site-text)" 
+        }}
+      >
+        {/* Sticky Container locks the view for N viewports */}
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
 
-        {/* Heavy Editorial Background Glow */}
-        <div
-          className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
-          style={{ backgroundColor: "var(--site-glow)" }}
-        />
+          {/* Heavy Editorial Background Glow */}
+          <div
+            className="absolute top-1/2 left-1/2 w-[800px] h-[800px] rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+            style={{ backgroundColor: "var(--site-glow)" }}
+          />
 
-        <div className="w-full h-full max-w-7xl mx-auto flex flex-col items-start lg:items-stretch lg:justify-center relative z-10 px-6 pt-24 lg:pt-0">
-          
-          {/* Header Title */}
-          <div className="w-full mb-12 lg:absolute lg:top-24 lg:left-6 z-50 pointer-events-none">
-            <span className="t-accent-label">The JZ Method</span>
-            <h2 className="t-display mt-2">The Anatomy of Creation</h2>
-          </div>
+          <div className="w-full h-full max-w-7xl mx-auto flex flex-col items-start lg:items-stretch lg:justify-center relative z-10 px-6 pt-24 lg:pt-0">
+            
+            {/* Header Title */}
+            <div className="w-full mb-12 lg:absolute lg:top-24 lg:left-6 z-50 pointer-events-none">
+              <span className="t-accent-label">The JZ Method</span>
+              <h2 className="t-display mt-2">The Anatomy of Creation</h2>
+            </div>
 
-          {/* Dual-Column Layout */}
-          <div className="w-full lg:h-[70%] grid lg:grid-cols-2 lg:gap-16 relative">
+            {/* Dual-Column Layout */}
+            <div className="w-full lg:h-[70%] grid lg:grid-cols-2 lg:gap-16 relative">
 
-            {/* LEFT: Process Sticky Visual */}
-            <div className="relative w-full h-[40vh] lg:h-full flex items-center justify-center">
-              <div
-                className="w-full max-w-[500px] aspect-[4/5] relative rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm"
-                style={{
-                  backgroundColor: "color-mix(in srgb, var(--site-surface) 40%, transparent)",
-                  border: "1px solid var(--site-border)",
-                }}
-              >
-                {/* Global SVG Component (Layered transformation across all steps) */}
-                <ProcessIllustrationRenderer progress={scrollYProgress} />
+              {/* LEFT: Process Sticky Visual */}
+              <div className="relative w-full h-[40vh] lg:h-full flex items-center justify-center">
+                <div
+                  className="w-full max-w-[500px] aspect-[4/5] relative rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm"
+                  style={{
+                    backgroundColor: "color-mix(in srgb, var(--site-surface) 40%, transparent)",
+                    border: "1px solid var(--site-border)",
+                  }}
+                >
+                  {/* Global SVG Component (Layered transformation across all steps) */}
+                  <ProcessIllustrationRenderer progress={scrollYProgress} />
 
-                {/* Optional Custom asset overrides (e.g. Lottie JSON) driven by CMS */}
-                <AnimatePresence>
+                  {/* Optional Custom asset overrides (e.g. Lottie JSON) driven by CMS */}
+                  <AnimatePresence>
+                    {activeData.map((stage: any, i: number) => {
+                      const isCustom = stage.illustrationType && stage.illustrationType !== "animation";
+                      if (!isCustom) return null;
+
+                      const w = 1 / activeData.length;
+                      const start = i * w;
+                      const end = (i + 1) * w;
+                      
+                      // eslint-disable-next-line react-hooks/rules-of-hooks
+                      const opacity = useTransform(
+                        scrollYProgress,
+                        [Math.max(0, start - 0.05), start, Math.max(0, end - 0.05), end],
+                        [0, 1, 1, i === activeData.length - 1 ? 1 : 0]
+                      );
+
+                      const assetUrl = stage.assetLight || stage.assetDark || stage.imageUrl;
+
+                      return (
+                        <motion.div
+                          key={`custom-${stage.id}`}
+                          style={{ opacity }}
+                          className="absolute inset-0 w-full h-full bg-[var(--site-surface)] z-10 flex items-center justify-center overflow-hidden"
+                        >
+                          {stage.illustrationType === "video" && assetUrl ? (
+                            <video src={assetUrl} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                          ) : stage.illustrationType === "lottie" && assetUrl ? (
+                             <iframe src={assetUrl} className="w-full h-full border-none pointer-events-none" />
+                          ) : assetUrl ? (
+                            <img src={assetUrl} alt={stage.title} className="w-full h-full object-cover" />
+                          ) : (
+                            <div className="w-full h-full">
+                              <BrandedImagePlaceholder />
+                            </div>
+                          )}
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              </div>
+
+              {/* RIGHT: Scrolling Text Content */}
+              <div className="relative w-full h-[35vh] lg:h-full flex items-center pl-0 lg:pl-16">
+                <div className="relative w-full">
                   {activeData.map((stage: any, i: number) => {
-                    const isCustom = stage.illustrationType && stage.illustrationType !== "animation";
-                    if (!isCustom) return null;
-
                     const w = 1 / activeData.length;
                     const start = i * w;
                     const end = (i + 1) * w;
-                    
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    const opacity = useTransform(
-                      scrollYProgress,
-                      [Math.max(0, start - 0.05), start, Math.max(0, end - 0.05), end],
-                      [0, 1, 1, i === activeData.length - 1 ? 1 : 0]
-                    );
 
-                    const assetUrl = stage.assetLight || stage.assetDark || stage.imageUrl;
+                    // Extreme strictness for clarity: 
+                    // 5% fade in, 90% solid hold, 5% fade out. No overlapping text.
+                    const fadeWin = w * 0.05;
+                    
+                    const p1 = Math.max(0, start);
+                    const p2 = Math.min(1, Math.max(0, start + fadeWin));
+                    const p3 = Math.max(0, Math.min(1, end - fadeWin));
+                    const p4 = Math.min(1, end);
+
+                    const opacityVals = [ i === 0 ? 1 : 0, 1, 1, i === activeData.length - 1 ? 1 : 0];
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                    const opacity = useTransform(scrollYProgress, [p1, p2, p3, p4], opacityVals);
+                    
+                    const yVals = [ i === 0 ? 0 : 20, 0, 0, i === activeData.length - 1 ? 0 : -20];
+                    // eslint-disable-next-line react-hooks/rules-of-hooks
+                    const y = useTransform(scrollYProgress, [p1, p2, p3, p4], yVals);
 
                     return (
                       <motion.div
-                        key={`custom-${stage.id}`}
-                        style={{ opacity }}
-                        className="absolute inset-0 w-full h-full bg-[var(--site-surface)] z-10 flex items-center justify-center overflow-hidden"
+                        key={`text-${stage.id}`}
+                        style={{ opacity, y }}
+                        className={`absolute inset-0 flex flex-col justify-center ${i === 0 ? "relative" : "absolute top-0 pointer-events-none"}`}
                       >
-                        {stage.illustrationType === "video" && assetUrl ? (
-                          <video src={assetUrl} autoPlay loop muted playsInline className="w-full h-full object-cover" />
-                        ) : stage.illustrationType === "lottie" && assetUrl ? (
-                           <iframe src={assetUrl} className="w-full h-full border-none pointer-events-none" />
-                        ) : assetUrl ? (
-                          <img src={assetUrl} alt={stage.title} className="w-full h-full object-cover" />
-                        ) : (
-                          <div className="w-full h-full">
-                            <BrandedImagePlaceholder />
-                          </div>
-                        )}
+                        <div className="flex items-center gap-4 mb-6">
+                          <span className="t-step">{i === 0 ? "..." : (stage.stepNumber || stage.id)}</span>
+                          <span
+                            className="t-accent-label py-2"
+                            style={{ borderBottom: "1px solid color-mix(in srgb, var(--site-accent) 30%, transparent)" }}
+                          >
+                            {i === 0 ? "Origin Stage" : (stage.stepNumber ? "Process Step" : stage.label)}
+                          </span>
+                        </div>
+
+                        <h3 className="t-heading mb-6 drop-shadow-md">{stage.title}</h3>
+
+                        <p className="t-lead max-w-lg">
+                          {stage.description}
+                        </p>
                       </motion.div>
                     );
                   })}
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* RIGHT: Scrolling Text Content */}
-            <div className="relative w-full h-[35vh] lg:h-full flex items-center pl-0 lg:pl-16">
-              <div className="relative w-full">
-                {activeData.map((stage: any, i: number) => {
-                  const w = 1 / activeData.length;
-                  const start = i * w;
-                  const end = (i + 1) * w;
-
-                  // Extreme strictness for clarity: 
-                  // 5% fade in, 90% solid hold, 5% fade out. No overlapping text.
-                  const fadeWin = w * 0.05;
-                  
-                  const p1 = Math.max(0, start);
-                  const p2 = Math.min(1, Math.max(0, start + fadeWin));
-                  const p3 = Math.max(0, Math.min(1, end - fadeWin));
-                  const p4 = Math.min(1, end);
-
-                  const opacityVals = [ i === 0 ? 1 : 0, 1, 1, i === activeData.length - 1 ? 1 : 0];
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  const opacity = useTransform(scrollYProgress, [p1, p2, p3, p4], opacityVals);
-                  
-                  const yVals = [ i === 0 ? 0 : 20, 0, 0, i === activeData.length - 1 ? 0 : -20];
-                  // eslint-disable-next-line react-hooks/rules-of-hooks
-                  const y = useTransform(scrollYProgress, [p1, p2, p3, p4], yVals);
-
-                  return (
-                    <motion.div
-                      key={`text-${stage.id}`}
-                      style={{ opacity, y }}
-                      className={`absolute inset-0 flex flex-col justify-center ${i === 0 ? "relative" : "absolute top-0 pointer-events-none"}`}
-                    >
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="t-step">{i === 0 ? "..." : (stage.stepNumber || stage.id)}</span>
-                        <span
-                          className="t-accent-label py-2"
-                          style={{ borderBottom: "1px solid color-mix(in srgb, var(--site-accent) 30%, transparent)" }}
-                        >
-                          {i === 0 ? "Origin Stage" : (stage.stepNumber ? "Process Step" : stage.label)}
-                        </span>
-                      </div>
-
-                      <h3 className="t-heading mb-6 drop-shadow-md">{stage.title}</h3>
-
-                      <p className="t-lead max-w-lg">
-                        {stage.description}
-                      </p>
-                    </motion.div>
-                  );
-                })}
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Process Progress Rail (Vertical line tying it all together) */}
-        <div
-          className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 h-[40vh] w-[2px] rounded-full overflow-hidden hidden md:block"
-          style={{ backgroundColor: "var(--site-border)" }}
-        >
-          <motion.div
-            className="w-full rounded-full origin-top"
-            style={{ scaleY: progressBarScale, height: "100%", backgroundColor: "var(--site-accent)" }}
-          />
-        </div>
+          {/* Process Progress Rail (Vertical line tying it all together) */}
+          <div
+            className="absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 h-[40vh] w-[2px] rounded-full overflow-hidden hidden md:block"
+            style={{ backgroundColor: "var(--site-border)" }}
+          >
+            <motion.div
+              className="w-full rounded-full origin-top"
+              style={{ scaleY: progressBarScale, height: "100%", backgroundColor: "var(--site-accent)" }}
+            />
+          </div>
 
-        {/* Number Indicators along rail */}
-        <div className="absolute right-12 top-1/2 -translate-y-1/2 h-[40vh] hidden md:flex flex-col justify-between items-end pr-4 pointer-events-none">
-          {activeData.map((s: any, i: number) => {
-            const w = 1 / activeData.length;
-            const start = i * w;
-            const end = (i + 1) * w;
-            const fadeWin = w * 0.15;
+          {/* Number Indicators along rail */}
+          <div className="absolute right-12 top-1/2 -translate-y-1/2 h-[40vh] hidden md:flex flex-col justify-between items-end pr-4 pointer-events-none">
+            {activeData.map((s: any, i: number) => {
+              const w = 1 / activeData.length;
+              const start = i * w;
+              const end = (i + 1) * w;
+              const fadeWin = w * 0.15;
 
-            // eslint-disable-next-line react-hooks/rules-of-hooks
-            const activeOpacity = useTransform(
-              scrollYProgress,
-              [Math.max(0, start), Math.max(0, start + fadeWin), Math.max(0, end - fadeWin), Math.max(0, end)],
-              [0.3, 1, 1, 0.3]
-            );
-            return (
-              <motion.span
-                key={`ind-${s.id}`}
-                style={{ opacity: activeOpacity }}
-                className="t-label transition-opacity duration-200"
-              >
-                {i === 0 ? "00" : `0${i}`}
-              </motion.span>
-            );
-          })}
+              // eslint-disable-next-line react-hooks/rules-of-hooks
+              const activeOpacity = useTransform(
+                scrollYProgress,
+                [Math.max(0, start), Math.max(0, start + fadeWin), Math.max(0, end - fadeWin), Math.max(0, end)],
+                [0.3, 1, 1, 0.3]
+              );
+              return (
+                <motion.span
+                  key={`ind-${s.id}`}
+                  style={{ opacity: activeOpacity }}
+                  className="t-label transition-opacity duration-200"
+                >
+                  {i === 0 ? "00" : `0${i}`}
+                </motion.span>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ── MOBILE VERTICAL TIMELINE VERSION ── */}
+      <section 
+        className="block lg:hidden py-24 px-6 w-full relative overflow-hidden"
+        style={{ backgroundColor: "var(--site-bg-deep)", color: "var(--site-text)" }}
+      >
+        <div className="max-w-xl mx-auto">
+          {/* Header */}
+          <div className="mb-16 text-center">
+            <span className="t-accent-label">The JZ Method</span>
+            <h2 className="t-display mt-3 text-3xl sm:text-4xl font-black">The Anatomy of Creation</h2>
+          </div>
+
+          {/* Timeline Stack */}
+          <div className="flex flex-col gap-10">
+            {activeData.map((stage: any, i: number) => {
+              const assetUrl = stage.assetLight || stage.assetDark || stage.imageUrl;
+              const hasCustomVisual = stage.illustrationType && stage.illustrationType !== "animation";
+              
+              return (
+                <div 
+                  key={`mobile-stage-${stage.id}`}
+                  className="p-6 sm:p-8 rounded-3xl relative overflow-hidden backdrop-blur-sm"
+                  style={{
+                    backgroundColor: "color-mix(in srgb, var(--site-surface) 40%, transparent)",
+                    border: "1px solid var(--site-border)",
+                  }}
+                >
+                  {/* Backdrop Glow */}
+                  <div
+                    className="absolute top-1/2 left-1/2 w-72 h-72 rounded-full blur-[80px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+                    style={{ backgroundColor: "var(--site-glow)" }}
+                  />
+
+                  {/* Header Row */}
+                  <div className="flex items-center gap-3 mb-4 relative z-10">
+                    <span className="text-4xl font-black text-[var(--site-accent)] opacity-40">
+                      {i === 0 ? "00" : (stage.stepNumber || stage.id)}
+                    </span>
+                    <span className="t-accent-label font-bold text-xs tracking-wider uppercase">
+                      {i === 0 ? "Origin" : (stage.stepNumber ? "Process Step" : stage.label)}
+                    </span>
+                  </div>
+
+                  {/* Title & Description */}
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 text-[var(--site-text)] relative z-10">{stage.title}</h3>
+                  <p className="t-body text-sm sm:text-base text-[var(--site-text-muted)] leading-relaxed mb-6 relative z-10">
+                    {stage.description}
+                  </p>
+
+                  {/* Beautiful Framed Visual Preview */}
+                  <div 
+                    className="w-full aspect-[4/3] relative rounded-2xl overflow-hidden shadow-lg border border-[var(--site-border)] relative z-10"
+                    style={{
+                      backgroundColor: "var(--site-surface)",
+                    }}
+                  >
+                    {hasCustomVisual ? (
+                      stage.illustrationType === "video" && assetUrl ? (
+                        <video src={assetUrl} autoPlay loop muted playsInline className="w-full h-full object-cover" />
+                      ) : stage.illustrationType === "lottie" && assetUrl ? (
+                        <iframe src={assetUrl} className="w-full h-full border-none pointer-events-none" />
+                      ) : assetUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={assetUrl} alt={stage.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <BrandedImagePlaceholder />
+                      )
+                    ) : (
+                      <ProcessIllustrationRenderer progress={staticProgressValues[i]} />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
