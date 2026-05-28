@@ -43,7 +43,7 @@ export default async function ProjectDetailPage({ params }: { params: any }) {
       </div>
 
       {/* Main header details */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col md:flex-row md:justify-between md:items-center gap-6">
         <div>
           <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider
             ${project.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 
@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({ params }: { params: any }) {
       </div>
 
       {/* Progress tracking banner */}
-      <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm space-y-3">
+      <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-3">
         <div className="flex justify-between items-center text-sm font-bold text-slate-600">
           <span>Manufacturing Progression</span>
           <span>{progressPercent}% Completed</span>

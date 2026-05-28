@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Checkbox, Input, Button, Space, List, message } from "antd";
 import { toggleTaskStatus, addProjectTask, deleteProjectTask } from "@/app/actions/project";
+import { useRouter } from "next/navigation";
 
 type Task = {
   id: string;
@@ -17,6 +18,7 @@ interface ProjectTasksManagerProps {
 }
 
 export default function ProjectTasksManager({ projectId, initialTasks, onTasksUpdate }: ProjectTasksManagerProps) {
+  const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [loading, setLoading] = useState(false);
@@ -51,8 +53,8 @@ export default function ProjectTasksManager({ projectId, initialTasks, onTasksUp
       message.success("Checklist task added successfully!");
       setNewTaskTitle("");
       if (onTasksUpdate) onTasksUpdate();
-      // Wait for revalidation or manually reload
-      window.location.reload();
+      // Instantly refresh path data without full browser reload
+      router.refresh();
     } else {
       message.error(res.error || "Failed to add task.");
     }
@@ -72,7 +74,7 @@ export default function ProjectTasksManager({ projectId, initialTasks, onTasksUp
   };
 
   return (
-    <div className="space-y-6 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+    <div className="space-y-6 bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm">
       <div className="flex justify-between items-center border-b border-gray-100 pb-3">
         <h3 className="text-lg font-bold text-gray-800">Manufacturing Checklist</h3>
         <span className="text-xs font-bold text-slate-400">

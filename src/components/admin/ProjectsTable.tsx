@@ -6,6 +6,7 @@ import type { ColumnsType } from "antd/es/table";
 import { createProject, deleteProject, updateProject } from "@/app/actions/project";
 import Link from "next/link";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 type Project = {
   id: string;
@@ -25,6 +26,7 @@ interface ProjectsTableProps {
 }
 
 export default function ProjectsTable({ items, clients }: ProjectsTableProps) {
+  const router = useRouter();
   const [data, setData] = useState<Project[]>(items);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -77,8 +79,8 @@ export default function ProjectsTable({ items, clients }: ProjectsTableProps) {
     if (res.success) {
       message.success(editingProject ? "Project updated successfully!" : "Project created successfully! Default manufacturing checklist seeded.");
       setIsModalOpen(false);
-      // Wait for revalidation or dynamically trigger reload
-      window.location.reload();
+      // Instantly refresh server data without full browser reload
+      router.refresh();
     } else {
       message.error(res.error || "Failed to save project.");
     }

@@ -26,9 +26,12 @@ export default async function QuotesPage() {
   });
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Quote Estimates Management</h1>
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl md:text-3xl font-bold text-slate-900">Quote Estimates</h1>
+        <p className="text-sm text-slate-500 mt-1">Create, track, and convert quotes for custom mascot projects.</p>
+      </div>
+      <div className="bg-white p-5 md:p-6 rounded-2xl shadow-sm border border-slate-200/80">
         <QuotesTable 
           items={quotes as any} 
           leads={leads} 

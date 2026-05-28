@@ -1,29 +1,42 @@
 import React from "react";
-import Link from "next/link";
 import SignOutButton from "@/components/admin/SignOutButton";
+import AdminLayoutWrapper from "@/components/admin/AdminLayoutWrapper";
+import { ConfigProvider } from "antd";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <aside className="w-64 bg-slate-900 text-white p-6 flex flex-col gap-4">
-        <div className="text-2xl font-bold mb-8">JZ Arts CRM</div>
-        <Link href="/dashboard" className="opacity-80 hover:opacity-100 transition-opacity">Dashboard</Link>
-        <Link href="/leads" className="opacity-80 hover:opacity-100 transition-opacity">Leads</Link>
-        <Link href="/clients" className="opacity-80 hover:opacity-100 transition-opacity">Clients</Link>
-        <Link href="/quotes" className="opacity-80 hover:opacity-100 transition-opacity">Quotes</Link>
-        <Link href="/projects" className="opacity-80 hover:opacity-100 transition-opacity mb-4">Projects</Link>
-        
-        <div className="text-xs font-bold text-slate-500 uppercase tracking-widest mt-4 mb-2">CMS</div>
-        <Link href="/dashboard/brand-settings" className="opacity-80 hover:opacity-100 transition-opacity text-blue-300">Brand Settings</Link>
-        <Link href="/dashboard/site-content" className="opacity-80 hover:opacity-100 transition-opacity text-blue-300">Site Content</Link>
-        <Link href="/dashboard/portfolio" className="opacity-80 hover:opacity-100 transition-opacity text-blue-300">Portfolio</Link>
-        <Link href="/dashboard/process" className="opacity-80 hover:opacity-100 transition-opacity text-blue-300">Process Steps</Link>
-        <Link href="/dashboard/logos" className="opacity-80 hover:opacity-100 transition-opacity text-blue-300">Partner Logos</Link>
-        <SignOutButton />
-      </aside>
-      <main className="flex-1 p-8">
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#2563eb", // corporate royal blue
+          borderRadius: 12, // modern curved inputs, tables, and buttons
+          fontFamily: "var(--font-inter), sans-serif",
+          colorBgContainer: "#ffffff",
+          colorBorder: "#e2e8f0", // slate-200 border color
+        },
+        components: {
+          Table: {
+            headerBg: "#f8fafc", // slate-50 header background
+            headerColor: "#475569", // slate-600 text
+            headerBorderRadius: 12,
+            rowHoverBg: "#f1f5f9", // slate-100 hover transition
+          },
+          Button: {
+            fontFamily: "var(--font-inter), sans-serif",
+            fontWeight: 600,
+          },
+          Modal: {
+            borderRadiusLG: 16,
+          },
+          Drawer: {
+            borderRadiusLG: 16,
+          }
+        }
+      }}
+    >
+      <AdminLayoutWrapper signOutButton={<SignOutButton />}>
         {children}
-      </main>
-    </div>
+      </AdminLayoutWrapper>
+    </ConfigProvider>
   );
 }

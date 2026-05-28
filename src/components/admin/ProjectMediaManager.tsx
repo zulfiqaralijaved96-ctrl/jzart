@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { ImageUpload } from "./ImageUpload";
 import { addProjectMedia } from "@/app/actions/project";
 import { Button, message } from "antd";
+import { useRouter } from "next/navigation";
 
 type MediaItem = {
   id: string;
@@ -18,6 +19,7 @@ interface ProjectMediaManagerProps {
 }
 
 export default function ProjectMediaManager({ projectId, initialMedia }: ProjectMediaManagerProps) {
+  const router = useRouter();
   const [mediaList, setMediaList] = useState<MediaItem[]>(initialMedia);
   const [uploadUrl, setUploadUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -46,14 +48,14 @@ export default function ProjectMediaManager({ projectId, initialMedia }: Project
       };
       setMediaList(prev => [newMedia, ...prev]);
       setUploadUrl("");
-      window.location.reload();
+      router.refresh();
     } else {
       message.error(res.error || "Failed to attach file.");
     }
   };
 
   return (
-    <div className="space-y-6 bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+    <div className="space-y-6 bg-white p-5 md:p-6 rounded-2xl border border-slate-200/80 shadow-sm">
       <div className="border-b border-gray-100 pb-3">
         <h3 className="text-lg font-bold text-gray-800">Attachments & Progress Photos</h3>
       </div>
@@ -116,7 +118,7 @@ export default function ProjectMediaManager({ projectId, initialMedia }: Project
                 addProjectMedia(projectId, urlEl.value, "image").then(res => {
                   if (res.success) {
                     message.success("Progress photo attached successfully!");
-                    window.location.reload();
+                    router.refresh();
                   } else {
                     message.error(res.error || "Failed to attach photo.");
                   }
