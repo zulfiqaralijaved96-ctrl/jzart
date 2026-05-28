@@ -72,7 +72,7 @@ export function ProcessIllustrationRenderer({
       </motion.div>
 
       {/* MASTER CANVAS coordinates: Head centered around (100, 140) */}
-      <svg viewBox="0 0 200 240" className="w-[85%] h-[85%] drop-shadow-2xl z-10 overflow-visible mt-8">
+      <svg viewBox="0 0 200 240" className="w-full h-full p-4 sm:p-6 lg:p-8 drop-shadow-2xl z-10 overflow-visible">
         
         {/* =========================================
             STEP 0: INTRO - THE BLANK CANVAS (Detailed Blueprint)
