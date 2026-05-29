@@ -28,3 +28,75 @@ body {
   background-color: var(--site-accent);
   color: #ffffff;
 }
+
+/* =========================================================
+   ADMIN / CRM THEME
+   Uses the same design tokens as the main website so
+   the admin panel feels like part of the JZ Arts brand.
+   ========================================================= */
+
+/* Shell */
+.admin-shell {
+  background-color: #f8fafc; /* slate-50 main bg */
+}
+.admin-main-bg {
+  background-color: #f1f5f9; /* slate-100 workspace */
+}
+
+/* Sidebar */
+.admin-sidebar-bg {
+  background: linear-gradient(180deg, #0f0f12 0%, #141417 100%);
+  color: #e2e8f0;
+}
+.admin-border {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Sidebar section labels */
+.admin-section-label {
+  font-size: 0.625rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+/* Label accent text (e.g. "ADMIN PORTAL") */
+.admin-label-accent {
+  color: var(--site-accent, #ea580c);
+}
+
+/* Sidebar active nav link */
+.sidebar-active-link {
+  background: linear-gradient(135deg, var(--site-accent, #ea580c), color-mix(in srgb, var(--site-accent, #ea580c) 80%, #000));
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(234, 88, 12, 0.25);
+}
+
+/* Sidebar inactive nav link */
+.sidebar-inactive-link {
+  color: rgba(255, 255, 255, 0.55);
+}
+.sidebar-inactive-link:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Mobile toggle button */
+.admin-toggle-btn {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.6);
+}
+.admin-toggle-btn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -128,7 +128,7 @@ export default function LeadsTable({ initialData }: { initialData: Lead[] }) {
       render: (text, record) => (
         <button 
           onClick={() => handleOpenDrawer(record)} 
-          className="text-left font-bold text-slate-800 hover:text-blue-600 cursor-pointer block"
+          className="text-left font-bold text-slate-800 hover:text-orange-600 cursor-pointer block"
         >
           {text}
         </button>
@@ -325,7 +325,7 @@ export default function LeadsTable({ initialData }: { initialData: Lead[] }) {
         open={isEditModalOpen}
         onCancel={() => setIsEditModalOpen(false)}
         footer={null}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form
           form={form}

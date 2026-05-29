@@ -350,7 +350,7 @@ export default function QuotesTable({ items, leads, clients }: QuotesTableProps)
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form
           form={form}

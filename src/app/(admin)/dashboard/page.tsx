@@ -21,10 +21,10 @@ export default async function DashboardPage() {
   });
 
   const stats = [
-    { label: "Total Leads", value: totalLeads, icon: "group", color: "bg-amber-50 text-amber-600 border-amber-200", href: "/leads" },
-    { label: "Active Projects", value: activeProjects, icon: "engineering", color: "bg-blue-50 text-blue-600 border-blue-200", href: "/projects" },
-    { label: "Pending Quotes", value: pendingQuotes, icon: "request_quote", color: "bg-purple-50 text-purple-600 border-purple-200", href: "/quotes" },
-    { label: "Client Accounts", value: totalClients, icon: "business", color: "bg-emerald-50 text-emerald-600 border-emerald-200", href: "/clients" },
+    { label: "Total Leads", value: totalLeads, icon: "group", color: "bg-orange-50 text-orange-600 border-orange-200", href: "/leads" },
+    { label: "Active Projects", value: activeProjects, icon: "engineering", color: "bg-amber-50 text-amber-700 border-amber-200", href: "/projects" },
+    { label: "Pending Quotes", value: pendingQuotes, icon: "request_quote", color: "bg-orange-50/60 text-orange-500 border-orange-100", href: "/quotes" },
+    { label: "Client Accounts", value: totalClients, icon: "business", color: "bg-amber-50/60 text-amber-600 border-amber-100", href: "/clients" },
   ];
 
   return (
@@ -51,7 +51,7 @@ export default async function DashboardPage() {
               </div>
               <div>
                 <div className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</div>
-                <div className="text-2xl font-black mt-0.5 text-slate-800 group-hover:text-blue-600 transition-colors">{stat.value}</div>
+                <div className="text-2xl font-black mt-0.5 text-slate-800 group-hover:text-orange-600 transition-colors">{stat.value}</div>
               </div>
             </div>
           </Link>
@@ -62,7 +62,7 @@ export default async function DashboardPage() {
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200/80">
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-lg font-bold text-slate-800">Recent Inquiries</h2>
-          <Link href="/leads" className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+          <Link href="/leads" className="text-sm font-semibold text-orange-600 hover:text-orange-800 transition-colors">
             View All Leads →
           </Link>
         </div>

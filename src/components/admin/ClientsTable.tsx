@@ -113,7 +113,7 @@ export default function ClientsTable({ initialData }: { initialData: Client[] })
       render: (text, record) => (
         <button 
           onClick={() => handleOpenDrawer(record)} 
-          className="text-left font-bold text-slate-800 hover:text-blue-600 cursor-pointer block"
+          className="text-left font-bold text-slate-800 hover:text-orange-600 cursor-pointer block"
         >
           {text}
         </button>
@@ -284,7 +284,7 @@ export default function ClientsTable({ initialData }: { initialData: Client[] })
         open={isEditModalOpen}
         onCancel={() => setIsEditModalOpen(false)}
         footer={null}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form
           form={form}

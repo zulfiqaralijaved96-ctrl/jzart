@@ -227,7 +227,7 @@ export default function ProjectsTable({ items, clients }: ProjectsTableProps) {
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         footer={null}
-        destroyOnClose
+        destroyOnHidden
       >
         <Form
           form={form}

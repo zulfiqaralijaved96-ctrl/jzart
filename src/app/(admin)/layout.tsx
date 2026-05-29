@@ -8,11 +8,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#2563eb", // corporate royal blue
-          borderRadius: 12, // modern curved inputs, tables, and buttons
+          colorPrimary: "#ea580c", // JZ Arts brand orange — matches website accent
+          borderRadius: 12,
           fontFamily: "var(--font-inter), sans-serif",
           colorBgContainer: "#ffffff",
-          colorBorder: "#e2e8f0", // slate-200 border color
+          colorBorder: "#e2e8f0",
         },
         components: {
           Table: {
