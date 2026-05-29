@@ -6,9 +6,11 @@ interface ImageUploadProps {
   name: string;
   defaultValue?: string;
   className?: string;
+  bucket?: string;
+  folder?: string;
 }
 
-export function ImageUpload({ name, defaultValue, className = "" }: ImageUploadProps) {
+export function ImageUpload({ name, defaultValue, className = "", bucket, folder }: ImageUploadProps) {
   const [preview, setPreview] = useState<string | null>(defaultValue || null);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +26,13 @@ export function ImageUpload({ name, defaultValue, className = "" }: ImageUploadP
     formData.append("file", file);
 
     try {
-      const res = await fetch("/api/upload", {
+      const queryParams = new URLSearchParams();
+      if (bucket) queryParams.append("bucket", bucket);
+      if (folder) queryParams.append("folder", folder);
+      const queryString = queryParams.toString();
+      const uploadUrl = `/api/upload${queryString ? `?${queryString}` : ""}`;
+
+      const res = await fetch(uploadUrl, {
         method: "POST",
         body: formData,
       });

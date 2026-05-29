@@ -74,6 +74,7 @@ model Lead {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   quotes      Quote[]
+  eventRequestNumber String?   @unique
 
   // --- Additive JZ Events Core Fields ---
   websiteSource      String    @default("JZ_ARTS") // "JZ_ARTS" or "JZ_EVENTS"
@@ -244,4 +245,135 @@ model PortfolioItem {
   order            Int      @default(0)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model EventPackage {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  shortDescription String?
+  fullDescription  String?
+  bestFor          String?
+  includedItems    String?  // JSON string array of inclusions
+  optionalAddons   String?  // JSON string array of compatible addon slugs
+  startingPrice    Decimal? @default(0.00)
+  priceLabel       String?  // e.g. "Rs. 25,000" or "Request Quote"
+  setupTime        String?
+  guestRange       String?
+  coverImageUrl    String?
+  galleryImages    String?  // JSON string array of URLs
+  tags             String?  // Comma separated
+  isFeatured       Boolean  @default(false)
+  isActive         Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model EventTheme {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  publicSafeName     String?
+  category           String
+  description        String?
+  colorPalette       String?  // JSON string array of hex color codes
+  bestAgeGroup       String?
+  recommendedPackage String?
+  coverImageUrl      String?
+  galleryImages      String?  // JSON string array of URLs
+  fullDescription    String?
+  selectableColors   String?  // JSON string array of presets
+  decorOptions       String?  // JSON string array of styling choices
+  balloonColorOptions String? // JSON string array of custom colors
+  tags               String?  // Comma separated
+  isFeatured         Boolean  @default(false)
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model EventAddon {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  category           String
+  shortDescription   String?
+  fullDescription    String?
+  startingPrice      Decimal? @default(0.00)
+  priceLabel         String?  // e.g. "Rs. 15,000" or "Request Quote"
+  quantityAllowed    Boolean  @default(false)
+  minQuantity        Int      @default(0)
+  maxQuantity        Int      @default(100)
+  buttonLabel        String?
+  coverImageUrl      String?
+  galleryImages      String?  // JSON string array of URLs
+  compatiblePackages String?  // JSON string array of package slugs/ids
+  tags               String?  // Comma separated
+  isFeatured         Boolean  @default(false)
+  isActive           Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model EventGalleryItem {
+  id          String   @id @default(cuid())
+  title       String
+  category    String
+  location    String?
+  description String?
+  imageUrl    String
+  galleryImages String?  // JSON string array of additional URLs
+  tags        String?  // Comma separated
+  isFeatured  Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EventRequest {
+  id                  String   @id @default(cuid())
+  eventRequestNumber  String   @unique
+  leadId              String?
+  customerName        String
+  customerPhone       String?
+  customerEmail       String
+  company             String?
+  eventType           String?
+  eventDate           DateTime?
+  eventTime           String?
+  city                String?
+  eventLocation       String?
+  setupLocation       String?
+  guestCount          Int?
+  childAge            String?
+  eventDuration       String?
+  deliveryArea        String?
+  setupFloor          String?  @default("Ground")
+  elevatorAvailable   Boolean? @default(false)
+  parkingAvailable    Boolean? @default(true)
+  setupSpaceAvailable String?
+  powerAvailable      Boolean? @default(true)
+  accessNotes         String?
+  
+  // Snapshot selections
+  selectedPackageId   String?
+  selectedPackageSnapshot String? // JSON package snapshot
+  selectedThemeId     String?
+  selectedThemeSnapshot   String? // JSON theme snapshot
+  selectedThemeColors String? // JSON array of colors
+  selectedDecorOptions String? // JSON array of choices
+  selectedAddonsSnapshot String? // JSON array of addons + quantities
+  
+  estimatedTotal      Decimal? @default(0.00)
+  budgetRange         String?
+  notes               String?
+  referenceImageUrl   String?
+  status              String   @default("SUBMITTED") // DRAFT, SUBMITTED, WHATSAPP_OPENED, CONTACTED, QUOTED, CONFIRMED, CANCELLED
+  whatsappOpenedAt    DateTime?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }

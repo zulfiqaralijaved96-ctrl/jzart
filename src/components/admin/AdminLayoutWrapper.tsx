@@ -44,6 +44,13 @@ export default function AdminLayoutWrapper({ children, signOutButton }: AdminLay
     { label: "Partner Logos", href: "/dashboard/logos", icon: Award },
   ];
 
+  const eventItems = [
+    { label: "Event Packages", href: "/dashboard/events/packages", icon: FileSpreadsheet },
+    { label: "Themes & Backdrops", href: "/dashboard/events/themes", icon: Route },
+    { label: "Event Add-ons", href: "/dashboard/events/addons", icon: Settings },
+    { label: "Karachi Gallery", href: "/dashboard/events/gallery", icon: ImageIcon },
+  ];
+
   const renderNavLinks = (items: typeof menuItems, onClick?: () => void) => {
     return items.map((item) => {
       const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -127,6 +134,12 @@ export default function AdminLayoutWrapper({ children, signOutButton }: AdminLay
             {renderNavLinks(cmsItems)}
           </div>
 
+          {/* Event Planner CMS Navigation */}
+          <div className="flex flex-col gap-1">
+            <span className="admin-section-label px-4 mb-1.5">JZ Events Portal</span>
+            {renderNavLinks(eventItems)}
+          </div>
+
         </div>
 
         {/* User Profile / Logout Action */}
@@ -185,6 +198,12 @@ export default function AdminLayoutWrapper({ children, signOutButton }: AdminLay
                 <div className="flex flex-col gap-1">
                   <span className="admin-section-label px-4 mb-1.5">Website Settings</span>
                   {renderNavLinks(cmsItems, () => setIsMobileMenuOpen(false))}
+                </div>
+
+                {/* Event Planner CMS Navigation */}
+                <div className="flex flex-col gap-1">
+                  <span className="admin-section-label px-4 mb-1.5">JZ Events Portal</span>
+                  {renderNavLinks(eventItems, () => setIsMobileMenuOpen(false))}
                 </div>
               </div>
 

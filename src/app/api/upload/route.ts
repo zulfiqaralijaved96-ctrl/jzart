@@ -38,16 +38,22 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
+    // Read optional bucket and folder parameters
+    const searchParams = request.nextUrl.searchParams;
+    const bucket = searchParams.get("bucket") || "mascot-assets";
+    const folder = searchParams.get("folder") || "";
+
     // Make filename unique
     const ext = file.name.split('.').pop() || 'png';
     const uniqueFilename = `media_${Date.now()}_${Math.random().toString(36).substring(7)}.${ext}`;
+    const uploadPath = folder ? `${folder}/${uniqueFilename}` : uniqueFilename;
 
     // 4. Dynamic upload based on configuration
     if (isSupabaseStorageReady && supabaseAdmin) {
-      // Upload to Supabase Storage Bucket "mascot-assets"
+      // Upload to target Supabase Storage Bucket (e.g. mascot-assets or jz-events-assets)
       const { data: uploadData, error: uploadError } = await supabaseAdmin.storage
-        .from("mascot-assets")
-        .upload(uniqueFilename, buffer, {
+        .from(bucket)
+        .upload(uploadPath, buffer, {
           contentType: file.type,
           upsert: true,
         });
@@ -59,8 +65,8 @@ export async function POST(request: NextRequest) {
 
       // Get public URL
       const { data: publicUrlData } = supabaseAdmin.storage
-        .from("mascot-assets")
-        .getPublicUrl(uniqueFilename);
+        .from(bucket)
+        .getPublicUrl(uploadPath);
 
       if (!publicUrlData?.publicUrl) {
         return NextResponse.json({ success: false, error: "Failed to generate public storage URL" }, { status: 500 });
@@ -69,10 +75,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: true, url: publicUrlData.publicUrl });
     } else {
       // Fallback: Local filesystem uploads (for local development)
-      const uploadDir = join(process.cwd(), "public", "uploads");
+      const uploadDir = folder 
+        ? join(process.cwd(), "public", "uploads", folder)
+        : join(process.cwd(), "public", "uploads");
       const filepath = join(uploadDir, uniqueFilename);
 
-      // Ensure the uploads directory exists
+      // Ensure the directory exists
       try {
         await mkdir(uploadDir, { recursive: true });
       } catch (err: any) {
@@ -83,7 +91,9 @@ export async function POST(request: NextRequest) {
       await writeFile(filepath, buffer);
 
       // Return the public local URL
-      const publicUrl = `/uploads/${uniqueFilename}`;
+      const publicUrl = folder
+        ? `/uploads/${folder}/${uniqueFilename}`
+        : `/uploads/${uniqueFilename}`;
       return NextResponse.json({ success: true, url: publicUrl });
     }
 
