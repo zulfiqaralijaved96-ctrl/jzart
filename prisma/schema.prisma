@@ -74,6 +74,43 @@ model Lead {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   quotes      Quote[]
+
+  // --- Additive JZ Events Core Fields ---
+  websiteSource      String    @default("JZ_ARTS") // "JZ_ARTS" or "JZ_EVENTS"
+  serviceType        String?   // "EVENT_MANAGEMENT", "INFLATABLE_RENTAL", etc.
+  eventType          String?   // "BIRTHDAY", "CORPORATE", "MALL_ACTIVATION"
+  eventDate          DateTime?
+  eventTime          String?
+  eventLocation      String?
+  setupLocation      String?   // "INDOOR", "OUTDOOR_GRASS", "MALL", etc.
+  city               String?   // e.g. "Karachi"
+  guestCount         Int?
+  childAge           String?
+  eventDuration      String?
+  selectedPackage    String?
+  selectedTheme      String?
+  selectedAddons     String?   // JSON Stringified Array of addons
+  productType        String?   // Specific single rental requested
+  budgetRange        String?
+  referenceImageUrl  String?
+
+  // --- Additive JZ Events Logistics & Delivery Fields ---
+  deliveryArea       String?
+  deliveryCharges    Decimal?  @default(0.00)
+  setupFloor         String?   @default("Ground")
+  elevatorAvailable  Boolean?  @default(false)
+  parkingAvailable   Boolean?  @default(true)
+  accessNotes        String?
+  setupSpaceAvailable String?
+  powerAvailable     Boolean?  @default(true)
+
+  // --- Additive JZ Events Booking & Payment Tracking Fields ---
+  advanceRequired    Decimal?  @default(0.00)
+  advanceReceived    Decimal?  @default(0.00)
+  balanceDue         Decimal?  @default(0.00)
+  paymentStatus      String?   @default("UNPAID") // UNPAID, ADVANCE_RECEIVED, PARTIAL_PAID, FULLY_PAID
+  paymentMethod      String?
+  paymentReference   String?
 }
 
 model Client {
