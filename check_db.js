@@ -3,11 +3,18 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function main() {
-  const settings = await prisma.siteSettings.findFirst();
-  console.log("Settings:", settings);
-  
-  const logos = await prisma.partnerLogo.findMany();
-  console.log("Logos:", logos);
+  const items = await prisma.portfolioItem.findMany();
+  console.log("Portfolio Items count:", items.length);
+  items.forEach(item => {
+    console.log({
+      id: item.id,
+      title: item.title,
+      category: item.category,
+      coverImage: item.coverImage,
+      thumbnailImage: item.thumbnailImage,
+      isPublished: item.isPublished
+    });
+  });
 }
 
 main()
